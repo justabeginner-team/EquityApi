@@ -1,6 +1,5 @@
-<div align="center">
-  ##EquityApi (Jenga-Api) 
-  </dv>
+##EquityApi (Jenga-Api) 
+  
 
 ![Labeler](https://github.com/justabeginner-team/EquityApi/workflows/Labeler/badge.svg)
 
