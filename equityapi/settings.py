@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
-from pathlib import Path
 from decouple import config
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG',default=True, cast=bool)
+DEBUG = config('DEBUG',cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'equitycore',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +119,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#generated password in jengahq
+PASSWORD=config('PASSWORD')
+
+#generated merchant code for jengahq
+MERCHANT_CODE=config('MERCHANT_CODE')
+#generated api key from jengahq
+API_KEY=config('API_KEY')
+#to determine whether its sandbox or production
+ENVIRONMENT=config('ENVIRONMENT')
+
+SANDBOX_URL=config('SANDBOX_URL')
+PRODUCTION_URL = config('PRODUCTION_URL')
+#allows to generate a new token before the expirely minus threshold is over
+TOKEN_THRESHOLD=config('TOKEN_THRESHOLD')
