@@ -1,4 +1,4 @@
-##EquityApi (Jenga-Api) 
+## EquityApi (Jenga-Api) 
   
 
 ![Labeler](https://github.com/justabeginner-team/EquityApi/workflows/Labeler/badge.svg)
