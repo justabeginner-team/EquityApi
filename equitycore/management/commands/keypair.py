@@ -8,8 +8,14 @@ class Command(BaseCommand):
             **current working** directory  under the **.JengaAPI/keys/** Directory
             """
 
+<<<<<<< HEAD
     def add_arguments(self, parser):
         parser.add_argument('-gk', '--genkey', type=str, help='defines generating key pairs', )
+=======
+    def add_arguments(self,parser):
+        parser.add_argument('-gk','--genkey',type=str,help='defines generating key pairs',required=True,)
+
+>>>>>>> bf2d6793dfb67d50d66226e7d56e9bb9f5580df0
 
     def handle(self, *args, **kwargs):
         if kwargs['genkey']:
