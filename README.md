@@ -5,17 +5,17 @@
 
 Generating key pairs
   run this command on the terminal.
-```python
+```bash
 python manage.py keypair -gk GEN_KEY  
 ```
 or
-```python
+```bash
 python manage.py keypair --genkey GEN_KEY 
 ```
  ### Note better 
-  pass a tuple to 
+  pass argument to the signature function and obtain a tuple 
   
-      ```python
-      def signature(requestfields):
-        pass
-  
+ ```python
+def signature(requestfields):
+    pass
+``` 
