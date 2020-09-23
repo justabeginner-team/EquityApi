@@ -9,7 +9,7 @@ class Command(BaseCommand):
             """
 
     def add_arguments(self,parser):
-        parser.add_argument('-gk','--genkey',type=str,help='defines generating key pairs',)
+        parser.add_argument('-gk','--genkey',type=str,help='defines generating key pairs',required=True,)
 
 
     def handle(self,*args,**kwargs):
