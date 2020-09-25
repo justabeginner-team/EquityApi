@@ -43,7 +43,7 @@ def signature(requestfields):
     ::returns a Base64 encoded string of the resulting signature
     
     """
-    
+
     data_concat = "".join(requestfields).encode("utf-8")
     digest = SHA256.new()
     digest.update(data_concat)
@@ -53,5 +53,4 @@ def signature(requestfields):
         private_key = RSA.importKey(pk.read())
 
     signer = PKCS1_v1_5.new(private_key)
-    return  b64encode(signer.sign(digest))
-    
+    return b64encode(signer.sign(digest))

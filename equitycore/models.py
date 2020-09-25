@@ -7,7 +7,5 @@ class AuthToken(models.Model):
     expires_in = models.BigIntegerField()
     objects = AuthTokenManager()
 
-   
-
     def __str__(self):
         return "access token"
