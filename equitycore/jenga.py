@@ -27,8 +27,8 @@ def get_token():
     }
 
     response = post(url, payload=payload, headers=headers)
-    token = json.loads(response.text)
-    return token
+    
+    return json.loads(response.text)
 
 
 def signature(requestfields):
