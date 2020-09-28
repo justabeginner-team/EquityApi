@@ -1,26 +1,24 @@
-# EquityApi (Jenga-Api) 
-  
-
-![Labeler](https://github.com/justabeginner-team/EquityApi/workflows/Labeler/badge.svg)
+# EquityApi (Jenga-Api) ![Labeler](https://github.com/justabeginner-team/EquityApi/workflows/Labeler/badge.svg)
 
 # Documentation
 # Getting Started
-
+Before installing the package get your Jenga API credentials by creating an account [here](https://developer.jengaapi.io)
 ## Installation
+1. Create a new virtual environment:
+    - If using vanilla [virtualenv](https://virtualenv.pypa.io/en/latest/), run `virtualenv venv` and then `source venv/bin/activate`
+    - If using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/), run `mkvirtualenv venv`
 1. Install equity-jenga-api
 ```bash
 # In terminal do:
 pip install equity-jenga-api
 ```
-
-2. Are you a developer? Run the following commands to build from source:-
+1. Are you a developer? Run the following commands to build from source:-
 
 ```bash
 $ git clone 
 $ cd equity-jenga-api
 ```
-
-3. Configure your settings.py as follows:
+1. Configure your settings.py as follows:
  ```python
 from decouple import config
 
@@ -50,8 +48,7 @@ or
 ```bash
 python manage.py keypair --genkey GEN_KEY 
 ```
-
-2. To generate a signature pass arguments to the signature function and obtain a tuple 
+1. To generate a signature pass arguments to the signature function and obtain a tuple 
   
  ```python
 from equitycore.jenga import signature
@@ -60,8 +57,22 @@ from equitycore.jenga import signature
 fields=()
 signed_data=signature(fields)
 ``` 
+1. To generate a token:
+```bash
+# run the following in the terminal
+python manage.py shell
+
+# imports AuthToken
+from equitycore.models import AuthToken
+
+# gets token
+AuthToken.objects.getaccesstoken()
+``` 
 
 # Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
 
 # Support
 
