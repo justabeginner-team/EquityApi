@@ -7,18 +7,18 @@ Before installing the package get your Jenga API credentials by creating an acco
 1. Create a new virtual environment:
     - If using vanilla [virtualenv](https://virtualenv.pypa.io/en/latest/), run `virtualenv venv` and then `source venv/bin/activate`
     - If using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/), run `mkvirtualenv venv`
-1. Install equity-jenga-api
+2. Install equity-jenga-api
 ```bash
 # In terminal do:
 pip install equity-jenga-api
 ```
-1. Are you a developer? Run the following commands to build from source:-
+3. Are you a developer? Run the following commands to build from source:-
 
 ```bash
 $ git clone 
 $ cd equity-jenga-api
 ```
-1. Configure your settings.py as follows:
+4. Configure your settings.py as follows:
  ```python
 from decouple import config
 
@@ -48,7 +48,7 @@ or
 ```bash
 python manage.py keypair --genkey GEN_KEY 
 ```
-1. To generate a signature pass arguments to the signature function and obtain a tuple 
+2. To generate a signature pass arguments to the signature function and obtain a tuple 
   
  ```python
 from equitycore.jenga import signature
@@ -57,7 +57,7 @@ from equitycore.jenga import signature
 fields=()
 signed_data=signature(fields)
 ``` 
-1. To generate a token:
+3. To generate a token:
 ```bash
 # run the following in the terminal
 python manage.py shell
