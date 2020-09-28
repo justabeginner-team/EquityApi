@@ -1,56 +1,21 @@
-from base64 import b64encode
+from .models import EazzyPushRequest
 
-from Crypto.PublicKey import RSA
-from Crypto.Signature import PKCS1_v1_5
-from Crypto.Hash import SHA256
+class Jenga:
 
-import requests
-import json
-from django.conf import settings
-
-from .http import post
-from .helpers import pk_path as pkey_path
-
-
-def get_token():
-    """
-    fetch a new token
-    :param: type:
-    :return: JSON
-    """
-
-    url = f"{settings.SANDBOX_URL}/identity/v2/token"
-    payload = dict(username=settings.MERCHANT_CODE, password=settings.PASSWORD)
-
-    headers = {
-        "authorization": f"{settings.API_KEY}",
-    }
-
-    response = post(url, payload=payload, headers=headers)
-    
-    return json.loads(response.text)
-
-
-def signature(requestfields):
-    """
-    Build a String of concatenated values of the request fields with
-    following order: 
-     as specificied by the API endpoints
-
-    ::The resulting text is then signed with Private Key and Base64 encoded  to proof that this request is coming from the merchant.
-    ::Takes a tuple of request fields in the order that they should be
-    concatenated, hashes them with SHA-256, signs the resulting hash and
-    ::returns a Base64 encoded string of the resulting signature
-    
-    """
-
-    data_concat = "".join(requestfields).encode("utf-8")
-    digest = SHA256.new()
-    digest.update(data_concat)
-
-    private_key = False
-    with open(pkey_path(), "r") as pk:
-        private_key = RSA.importKey(pk.read())
-
-    signer = PKCS1_v1_5.new(private_key)
-    return b64encode(signer.sign(digest))
+    @staticmethod
+    def eazzypaypush(phone,country_code,amount,trans_ref):
+        """
+        Initiates Eazzy Push transaction
+        :param phone: user phone to start the Eazzy push e.g. 0765******
+        :param amount: amount to be deducted from the users account wallet
+        :param country_code:country code from which the initiator has registered their account
+        :param trans_desc: the message that get shown to the user on the checkout USSD message
+        :return: EazzyPushRequest object
+        """
+       
+        return EazzyPushRequest.objects.create(
+            customer_phone_number= phone,
+            customer_country_code= country_code,
+            transaction_amount=amount,
+            transaction_description= trans_ref,
+        )

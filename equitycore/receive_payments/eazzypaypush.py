@@ -1,42 +1,50 @@
 from django.conf import settings
 
 from ..http import post
-from ..jenga import signature
+from ..utils.jengautils import signature
+from ..models import AuthToken
 
 
-def eazzypay_push():
+merchant_code = settings.MERCHANT_CODE
+
+
+def eazzypay_push(
+    mssid: int,
+    countryCode: str,
+    trans_amount: int,
+    trans_desc: str,
+):
     """
     fetch a new token
     :param: type:
     :return: JSON
     """
 
-    transaction_reference = ''
-    transaction_amount = ''
-    merchant_code = settings.MERCHANT_CODE
-    customer_country_code = 'KE'
+    trans_type = 'EazzyPayOnline'
+    trans_ref = 692194625798
+    trans_data = (str(trans_ref), str(trans_amount), merchant_code, countryCode)
+    signed_signature = signature(trans_data)
+    url = "https://sandbox.jengahq.io/transaction-test/v2/payments"
 
-    url = f"{settings.SANDBOX_URL}/identity/v2/payments"
     payload = {
         "customer": {
-            "mobileNumber": "0765555125",
-            "countryCode": f"{customer_country_code}"
+            "mobileNumber": str(mssid),
+            "countryCode": countryCode,
         },
         "transaction": {
-            "amount": f"{transaction_amount}",
-            "description": "A short description",
-            "type": "exampleType",
-            "reference": f"{transaction_reference}"
+            "amount": str(trans_amount),
+            "description": trans_desc,
+            "type": trans_type,
+            "reference": trans_ref,
         }
     }
-    signed_signature = signature((transaction_reference, transaction_amount, merchant_code, customer_country_code))
 
     headers = {
-        "authorization": f"{settings.API_KEY}",
+        "authorization": AuthToken.objects.getaccesstoken(),
         "signature": f'{signed_signature}',
         "content-type": 'application/json',
     }
 
     response = post(url, payload=payload, headers=headers)
 
-    return response
+    return response.text

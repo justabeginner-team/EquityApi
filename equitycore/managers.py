@@ -1,7 +1,7 @@
 import time
 from django.conf import settings
 from django.db import models
-from .jenga import get_token
+from .utils.jengautils import get_token
 
 
 class AuthTokenManager(models.Manager):
