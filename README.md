@@ -19,6 +19,7 @@ $ git clone
 $ cd equity-jenga-api
 ```
 4. Configure your settings.py as follows:
+Get to know how to use python-decouple [here](https://simpleisbetterthancomplex.com/2015/11/26/package-of-the-week-python-decouple.html)
  ```python
 from decouple import config
 
