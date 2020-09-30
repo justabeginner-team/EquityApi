@@ -2,13 +2,14 @@ from django.conf import settings
 
 from ..http import post
 from ..utils.jengautils import signature
-from ..models import AuthToken
+
 
 
 merchant_code = settings.MERCHANT_CODE
 
 
 def eazzypay_push(
+    token: str,
     mssid: int,
     countryCode: str,
     trans_amount: int,
@@ -24,8 +25,14 @@ def eazzypay_push(
     trans_ref = 692194625798
     trans_data = (str(trans_ref), str(trans_amount), merchant_code, countryCode)
     signed_signature = signature(trans_data)
-    url = "https://sandbox.jengahq.io/transaction-test/v2/payments"
-
+    
+    
+  
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization':f"{token}",
+        'signature': signed_signature,
+    }
     payload = {
         "customer": {
             "mobileNumber": str(mssid),
@@ -38,13 +45,9 @@ def eazzypay_push(
             "reference": trans_ref,
         }
     }
-
-    headers = {
-        "authorization": AuthToken.objects.getaccesstoken(),
-        "signature": f'{signed_signature}',
-        "content-type": 'application/json',
-    }
-
+    url = "https://uat.jengahq.io/transaction-test/v2/payments"
     response = post(url, payload=payload, headers=headers)
 
-    return response.text
+    return token,response.text
+
+   

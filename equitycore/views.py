@@ -14,6 +14,6 @@ def accesstoken(request):
     #access = AuthToken.objects.getaccesstoken()
     #access=get_token()
     #access=signature(("0765521578","KE","100","HALLO"))
-    access = Jenga.eazzypaypush(765521578, "KE", 100, "HALLO")
+    access = Jenga.lipanampesapush(765521578, "KE", 100, "HALLO")
     
     return HttpResponse(access)
