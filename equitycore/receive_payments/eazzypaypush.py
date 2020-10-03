@@ -45,7 +45,7 @@ def eazzypay_push(
             "reference": trans_ref,
         }
     }
-    url = "https://uat.jengahq.io/transaction-test/v2/payments"
+    url = "https://sandbox.jengahq.io/transaction-test/v2/payments"
     response = post(url, payload=payload, headers=headers)
 
     return token,response.text
