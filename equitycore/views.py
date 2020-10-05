@@ -1,3 +1,4 @@
+
 import json
 import requests
 import base64
@@ -30,7 +31,7 @@ def get_token():
     )
 
     headers = {
-        "authorization": "######",
+        "authorization": "@@@@@@@@@",
         "Content-Type": "application/x-www-form-urlencoded",
     }
 
@@ -66,32 +67,22 @@ def signature(requestfields):
 
 
 def accesstoken(request):
-    
-    #data = ("692194625798", "100", "3065426655","KE")
-    #print(signature(data))
-   
-
-    #url = "https://uat.jengahq.io/transaction-test/v2mk/payment/mpesastkpush"
     token = get_token().get("access_token")
-    print(token)
-    
-   
-    payload=dict(
-        #countryCode= "KE",
-        #currencyCode= "KES"
-    )
+
+    url = "https://uat.jengahq.io/transaction/v2/foreignexchangerates"
+
+    ke = "KE"
+    payload = "{{\r\n   \"countryCode\": \"{0}\",\r\n   \"currencyCode\": \"{1}\"\r\n}}".format(ke,"USD")
+
+    print(payload)
 
     headers = {
-        'Authorization':'Bearer ' +token,
-        'Content-Type': 'application/json',
-        
+        'Authorization': 'Bearer '+token,
+        'Content-Type': 'application/json'
     }
-    
-    url = "https://uat.jengahq.io/transaction/v2/payment/mpesastkpush"
-
+   
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    print(response.text)
-   
-    return HttpResponse(response.text.encode('utf8'))
-    
+    print(json.loads(response.text))
+
+    return HttpResponse(json.loads(response.text))
