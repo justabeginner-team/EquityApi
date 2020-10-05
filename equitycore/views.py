@@ -25,8 +25,8 @@ def get_token():
 
     url = "https://uat.jengahq.io/identity/v2/token"
     payload = dict(
-        username="#######",
-        password="#######",
+        username="#####",
+        password="#####",
     )
 
     headers = {
@@ -35,7 +35,7 @@ def get_token():
     }
 
     response = post(url, payload=payload, headers=headers)
-
+    print(response.text)
     return json.loads(response.text)
    
 
@@ -66,42 +66,32 @@ def signature(requestfields):
 
 
 def accesstoken(request):
-    print(get_token())
     
-    data = ("692194625798", "100", "3065426655","KE")
+    #data = ("692194625798", "100", "3065426655","KE")
     #print(signature(data))
-    import requests
+   
 
     #url = "https://uat.jengahq.io/transaction-test/v2mk/payment/mpesastkpush"
-    token=get_token()
-
-    url = "https://uat.jengahq.io/transaction-test/v2/payment/mpesastkpush"
-
+    token = get_token().get("access_token")
+    print(token)
+    
+   
     payload=dict(
-        
-            customer=dict(
-                mobileNumber="0711521598",
-                countryCode= "KE"
-            ),
-            transaction=dict(
-                amount="100",
-                description="test STKPUSH",
-                businessNumber="174379",
-                reference="ref"
-            ),
-       
+        #countryCode= "KE",
+        #currencyCode= "KES"
     )
 
-    
-    #print(payload)
     headers = {
-        'Authorization': '######',
+        'Authorization':'Bearer ' +token,
         'Content-Type': 'application/json',
-        'signature': signature(data)
+        
     }
-    print(token.get('access_token'))
+    
+    url = "https://uat.jengahq.io/transaction/v2/payment/mpesastkpush"
+
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    print(response.text.encode('utf8'))
+    print(response.text)
    
     return HttpResponse(response.text.encode('utf8'))
+    
