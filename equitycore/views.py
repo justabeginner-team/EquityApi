@@ -12,12 +12,12 @@ def accesstoken(request):
     #url = "https://uat.jengahq.io/transaction/v2/payment/mpesastkpush"
     
     countryCode= "KE"
-    mssid="0715112499"
-    amount="100"
+    mssid = "0758381339"
+    amount="1"
     desc="stkpush"
     
 
-    access=Jenga.lipanampesapush(mssid,countryCode,amount,desc)
-
+    Jenga.lipanampesapush(mssid,countryCode,amount,desc)
+    access="hallo nigga"
     
     return HttpResponse(access)
