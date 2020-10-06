@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rangefilter',
     'equitycore',
 ]
 
@@ -124,7 +125,10 @@ API_KEY = config('API_KEY')
 # to determine whether its sandbox or production
 ENVIRONMENT = config('ENVIRONMENT')
 
-SANDBOX_URL = config('SANDBOX_URL')
+UAT_URL = config('UAT_URL')
 PRODUCTION_URL = config('PRODUCTION_URL')
 # allows to generate a new token before the it expires minus threshold is over
 TOKEN_THRESHOLD = config('TOKEN_THRESHOLD')
+
+
+CELERY_BROKER_URL = 'amqp://localhost'

@@ -1,42 +1,47 @@
 from django.conf import settings
 
 from ..http import post
-from ..jenga import signature
+from ..utils.jengautils import signature
+
+merchant_code = settings.MERCHANT_CODE
 
 
-def eazzypay_push():
+def eazzypay_push(
+        token: str,
+        mssid: int,
+        countryCode: str,
+        trans_amount: int,
+        trans_desc: str,
+):
     """
     fetch a new token
     :param: type:
     :return: JSON
     """
 
-    transaction_reference = ''
-    transaction_amount = ''
-    merchant_code = settings.MERCHANT_CODE
-    customer_country_code = 'KE'
-
-    url = f"{settings.SANDBOX_URL}/identity/v2/payments"
-    payload = {
-        "customer": {
-            "mobileNumber": "0765555125",
-            "countryCode": f"{customer_country_code}"
-        },
-        "transaction": {
-            "amount": f"{transaction_amount}",
-            "description": "A short description",
-            "type": "exampleType",
-            "reference": f"{transaction_reference}"
-        }
-    }
-    signed_signature = signature((transaction_reference, transaction_amount, merchant_code, customer_country_code))
+    trans_type = 'EazzyPayOnline'
+    trans_ref = 692194625798
+    trans_data = (str(trans_ref), str(trans_amount), merchant_code, countryCode)
+    signed_signature = signature(trans_data)
 
     headers = {
-        "authorization": f"{settings.API_KEY}",
-        "signature": f'{signed_signature}',
-        "content-type": 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': f"{token}",
+        'signature': signed_signature,
     }
-
+    payload = {
+        "customer": {
+            "mobileNumber": str(mssid),
+            "countryCode": countryCode,
+        },
+        "transaction": {
+            "amount": str(trans_amount),
+            "description": trans_desc,
+            "type": trans_type,
+            "reference": trans_ref,
+        }
+    }
+    url = f"{settings.UAT_URL}/transaction-test/v2/payments"
     response = post(url, payload=payload, headers=headers)
 
-    return response
+    return token, response.text

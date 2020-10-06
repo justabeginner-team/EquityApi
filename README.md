@@ -57,15 +57,16 @@ CELERY_BROKER_URL = 'amqp://localhost'
 1. Generate your set of public and private keys:
   run this command on the terminal.
 ```bash
-python manage.py keypair -gk GEN_KEY  
+$ python manage.py keypair -gk GEN_KEY  
 ```
 or
 ```bash
-python manage.py keypair --genkey GEN_KEY 
+$ python manage.py keypair --genkey GEN_KEY 
 ```
 2. To generate a signature pass arguments to the signature function and obtain a tuple 
   
  ```python
+
 from equitycore.jenga import signature
 
 # assuming you have a variable fields set it to be a tuple of arguments to be signed in their appropriate order
@@ -98,3 +99,4 @@ Please make sure to update tests as appropriate.
 # Support
 
 # Licence
+
