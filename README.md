@@ -27,17 +27,31 @@ INSTALLED_APPS = [
     # ...
     'equity-jenga-api']
 
-# generated merchant code for jengahq
+'''
+Configure the following at the bottom of your settings.py
+'''
+
+# generated password in jengahq
+PASSWORD = config('PASSWORD')
+
+# generated merchant code from jengahq
 MERCHANT_CODE = config('MERCHANT_CODE')
+
 # generated api key from jengahq
 API_KEY = config('API_KEY')
-# to determine whether its sandbox or production
+
+# Environment is either sandbox or production
 ENVIRONMENT = config('ENVIRONMENT')
 
-SANDBOX_URL = config('SANDBOX_URL')
+# base url for api endpoints
+UAT_URL = config('UAT_URL')
 PRODUCTION_URL = config('PRODUCTION_URL')
+
 # allows to generate a new token before the it expires minus threshold is over
 TOKEN_THRESHOLD = config('TOKEN_THRESHOLD')
+
+
+CELERY_BROKER_URL = 'amqp://localhost'
 ```
 ## Configuration
 1. Generate your set of public and private keys:
@@ -69,6 +83,13 @@ from equitycore.models import AuthToken
 # gets token
 AuthToken.objects.getaccesstoken()
 ``` 
+4. Celery worker to run background tasks.
+- We have seen it best to use celery to run payment tasks, get upto speed on celery [here]():-
+<br />
+**run this command on a seperate terminal**
+```bash
+$ celery -A equityapi worker -l info -Q eazzypaypush_request,celery,lipanampesa_request
+```
 
 # Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
