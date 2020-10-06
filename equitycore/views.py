@@ -10,7 +10,7 @@ def accesstoken(request):
     #url = "https://uat.jengahq.io/transaction/v2/payment/mpesastkpush"
     
     countryCode= "KE"
-    mssid = "0763181872"
+    mssid = "0765521578"
     amount="1"
     desc="eazzy pay push"
     
