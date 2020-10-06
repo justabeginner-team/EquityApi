@@ -87,6 +87,7 @@ AuthToken.objects.getaccesstoken()
 - We have seen it best to use celery to run payment tasks, get upto speed on celery [here]():-
 <br />
 **run this command on a seperate terminal**
+<br />
 ```bash
 $ celery -A equityapi worker -l info -Q eazzypaypush_request,celery,lipanampesa_request
 ```
