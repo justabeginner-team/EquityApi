@@ -20,13 +20,13 @@ class EazzyPushRequest(models.Model):
     customer_phone_number = models.BigIntegerField(blank=True, null=True)
     transaction_type = models.CharField(max_length=20, blank=True, null=True)
     transaction_reference = models.CharField(max_length=20, unique=True, null=True)
-    transaction_date = models.DateTimeField( null=True)
+    transaction_date = models.DateTimeField(null=True)
     transaction_amount = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     transaction_description = models.CharField(
-        max_length=50, blank=True, null=True )
-    date_added=models.DateTimeField(auto_now_add=True)
+        max_length=50, blank=True, null=True)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return str(self.customer_phone_number)
@@ -35,24 +35,25 @@ class EazzyPushRequest(models.Model):
         db_table = "tbl_eazzypay_push"
         verbose_name_plural = "Eazzypaypush Requests"
 
+
 class LipanampesaRequest(models.Model):
     """
         Handles LipaNaMpesaOnline push Requests
     """
     id = models.BigAutoField(primary_key=True)
-    
+
     customer_phone_number = models.BigIntegerField(blank=True, null=True)
     customer_country_code = models.CharField(max_length=2)
     transaction_reference = models.CharField(
         max_length=20, unique=False, null=True)
-    
+
     transaction_amount = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     transaction_description = models.CharField(
         max_length=50, blank=True, null=True)
     transaction_date = models.DateTimeField(null=True)
-    transaction_status=models.CharField(blank=False,max_length=100)
+    transaction_status = models.CharField(blank=False, max_length=100)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
