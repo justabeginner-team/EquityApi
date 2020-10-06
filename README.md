@@ -73,7 +73,7 @@ fields=()
 signed_data=signature(fields)
 ``` 
 3. To generate a token:
-```bash
+```python
 # run the following in the terminal
 python manage.py shell
 
@@ -86,7 +86,7 @@ AuthToken.objects.getaccesstoken()
 4. Celery worker to run background tasks.
 - We have seen it best to use celery to run payment tasks, get upto speed on celery [here]():-
 - run this command on a seperate terminal
-```bash
+```python
  $ celery -A equityapi worker -l info -Q eazzypaypush_request,celery,lipanampesa_request
 ```
 
