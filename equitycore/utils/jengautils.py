@@ -19,20 +19,19 @@ def get_token():
     :return: JSON
     """
 
-    #url = f"{settings.UAT_URL}/identity/v2/token"
-    url = "https://uat.jengahq.io/identity/v2/token"
+    url = f"{settings.UAT_URL}/identity/v2/token"
     payload = dict(
-         username=settings.MERCHANT_CODE,
-         password=settings.PASSWORD,
-         )
+        username=settings.MERCHANT_CODE,
+        password=settings.PASSWORD,
+    )
 
     headers = {
         "authorization": f"{settings.API_KEY}",
-        "Content-Type":"application/x-www-form-urlencoded",
+        "Content-Type": "application/x-www-form-urlencoded",
     }
 
     response = post(url, payload=payload, headers=headers)
-    
+
     return json.loads(response.text)
 
 

@@ -1,9 +1,10 @@
-from .models import EazzyPushRequest,LipanampesaRequest
+from .models import EazzyPushRequest, LipanampesaRequest
+
 
 class Jenga:
 
     @staticmethod
-    def eazzypaypush(phone,country_code,amount,trans_ref):
+    def eazzypaypush(phone, country_code, amount, trans_ref):
         """
         Initiates Eazzy Push transaction
         :param phone: user phone to start the Eazzy push e.g. 0765******
@@ -12,12 +13,12 @@ class Jenga:
         :param trans_desc: the message that get shown to the user on the checkout USSD message
         :return: EazzyPushRequest object
         """
-       
+
         return EazzyPushRequest.objects.create(
-            customer_phone_number= phone,
-            customer_country_code= country_code,
+            customer_phone_number=phone,
+            customer_country_code=country_code,
             transaction_amount=amount,
-            transaction_description= trans_ref,
+            transaction_description=trans_ref,
         )
 
     @staticmethod
