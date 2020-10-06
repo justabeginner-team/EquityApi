@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import AuthToken,EazzyPushRequest
+from .models import AuthToken,EazzyPushRequest,LipanampesaRequest
 from rangefilter.filter import DateRangeFilter
 
 class AuthTokenAdmin(admin.ModelAdmin):
@@ -25,5 +25,26 @@ class EazzyPushRequestAdmin(admin.ModelAdmin):
     )
     search_fields = ("customer_phone_number",
                      "transaction_amount", "date_added", "transaction_date","customer_country_code")
+    list_filter = (("date_added", DateRangeFilter),
+                   ("transaction_date", DateRangeFilter),)
+
+
+@admin.register(LipanampesaRequest)
+class LipaNaMpesaRequestAdmin(admin.ModelAdmin):
+    list_display = ("customer_phone_number",
+                    "transaction_amount", "date_added", "transaction_date")
+    readonly_fields = (
+        "customer_phone_number",
+        "transaction_amount",
+        "customer_country_code",
+        
+        "transaction_reference",
+        "transaction_description",
+        "transaction_date",
+        "date_added",
+        "transaction_status",
+    )
+    search_fields = ("customer_phone_number",
+                     "transaction_amount", "date_added", "transaction_date", "customer_country_code")
     list_filter = (("date_added", DateRangeFilter),
                    ("transaction_date", DateRangeFilter),)

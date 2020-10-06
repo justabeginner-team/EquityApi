@@ -41,6 +41,7 @@ def lipa_na_mpesapush_task(
     amount,
     trans_desc,
     ):
+    #mssid="0"+mssid
 
     return lipanampesa(response,mssid,country_code,amount,trans_desc)
 

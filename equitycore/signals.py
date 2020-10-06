@@ -28,6 +28,6 @@ def handle_lipa_na_mpesa_post_save(sender,instance,**Kwargs):
             str(instance.customer_phone_number),
             instance.customer_country_code,
             str(instance.transaction_amount),
-            instance.transaction_reference,
+            instance.transaction_description,
             ),
     ).apply_async(queue="lipanampesa_request")

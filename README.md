@@ -24,7 +24,7 @@ def signature(requestfields):
 <br />
 **run this command on a seperate terminal**
 ```bash
-$ celery -A equityapi worker -l info -Q eazzypaypush_request,celery
+$ celery -A equityapi worker -l info -Q eazzypaypush_request,celery,lipanampesa_request
 ```
 
 

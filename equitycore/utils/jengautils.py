@@ -19,7 +19,8 @@ def get_token():
     :return: JSON
     """
 
-    url = "https://sandbox.jengahq.io/identity/v2/token"
+    #url = f"{settings.UAT_URL}/identity/v2/token"
+    url = "https://uat.jengahq.io/identity/v2/token"
     payload = dict(
          username=settings.MERCHANT_CODE,
          password=settings.PASSWORD,
