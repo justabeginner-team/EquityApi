@@ -1,4 +1,5 @@
 import os
+import random
 
 
 def pk_path():
@@ -10,3 +11,8 @@ def pk_path():
 
     """
     return os.path.join(os.getcwd(), ".JengaApi", "keys", "privatekey.pem")
+
+
+def reference_id_generator():
+    reference_id = "%0.12d" % random.randint(0, 999999999999)
+    return reference_id
