@@ -20,7 +20,7 @@ def eazzypay_push(
     """
 
     trans_type = 'EazzyPayOnline'
-    trans_ref = 692194625798
+    trans_ref = "000000000002"
 
     trans_data = (str(trans_ref), str(trans_amount), merchant_code, countryCode)
     signed_signature = signature(trans_data)
@@ -37,5 +37,9 @@ def eazzypay_push(
     url = f"{settings.UAT_URL}/transaction/v2/payments"
     response = post(url, payload=payload, headers=headers)
     data = json.loads(response.text)
-
-    return payload, data
+    pay=dict(
+        token=token,
+        ref=trans_ref,
+        data=data
+    )
+    return pay

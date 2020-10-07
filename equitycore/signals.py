@@ -3,7 +3,10 @@ from celery import chain
 from django.db.models.signals import post_save
 from .models import EazzyPushRequest, LipanampesaRequest
 from .tasks import (
-    call_eazzypaaypush_task, bearer_token_task, lipa_na_mpesapush_task
+    call_eazzypaaypush_task, 
+    bearer_token_task, 
+    lipa_na_mpesapush_task,
+    query_transaction_task,
 )
 
 
@@ -17,6 +20,7 @@ def handle_eazzypaypush_post_save(sender, instance, **Kwargs):
             str(instance.transaction_amount),
             instance.transaction_description,
         ),
+        query_transaction_task.s(),
     ).apply_async(queue="eazzypaypush_request")
 
 
