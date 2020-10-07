@@ -14,5 +14,5 @@ def pk_path():
 
 
 def reference_id_generator():
-    reference_id = "%0.12d" % random.randint(0, 999999999999)
+    reference_id = "%0.12d" % random.randint(1, 999999999999)
     return reference_id
