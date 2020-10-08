@@ -3,6 +3,7 @@ from django.conf import settings
 from ..http import post
 from ..utils.jengautils import signature
 from ..models import LipanampesaRequest
+from ..helpers import reference_id_generator
 
 
 def lipanampesa(
@@ -13,7 +14,7 @@ def lipanampesa(
         trans_desc: str,
 ):
     businessnumber = "174379"
-    trans_ref = "ref"
+    trans_ref = reference_id_generator()
 
     headers = {
         'Authorization': token,
@@ -29,5 +30,6 @@ def lipanampesa(
     response = post(url, headers=headers, payload=payload)
     data=json.loads(response.text)
     
-    LipanampesaRequest.objects.update(transaction_reference=data.get("transactionRef"),transaction_status=data.get("status"))
+    LipanampesaRequest.objects.update(api_transaction_reference=data.get("transactionRef"), 
+                            transaction_reference=trans_ref,transaction_status=data.get("status"))
     return data.get("transactionRef")

@@ -20,9 +20,12 @@ class EazzyPushRequestAdmin(admin.ModelAdmin):
         "customer_country_code",
         "transaction_type",
         "transaction_reference",
+        "api_transaction_reference",
         "transaction_description",
         "transaction_date",
         "date_added",
+        "transaction_status",
+        "paid",
     )
     search_fields = ("customer_phone_number",
                      "transaction_amount", "date_added", "transaction_date", "customer_country_code")
@@ -38,12 +41,13 @@ class LipaNaMpesaRequestAdmin(admin.ModelAdmin):
         "customer_phone_number",
         "transaction_amount",
         "customer_country_code",
-
         "transaction_reference",
+        "api_transaction_reference",
         "transaction_description",
         "transaction_date",
         "date_added",
         "transaction_status",
+        "paid",
     )
     search_fields = ("customer_phone_number",
                      "transaction_amount", "date_added", "transaction_date", "customer_country_code")

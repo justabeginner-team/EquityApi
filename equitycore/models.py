@@ -15,18 +15,32 @@ class EazzyPushRequest(models.Model):
     """
         Handles EazzyPay push Requests
     """
-    id = models.BigAutoField(primary_key=True)
-    customer_country_code = models.CharField(max_length=2)
-    customer_phone_number = models.BigIntegerField(blank=True, null=True)
-    transaction_type = models.CharField(max_length=20, blank=True, null=True)
-    transaction_reference = models.CharField(max_length=20, unique=True, null=True)
-    transaction_date = models.DateTimeField(null=True)
+    id = models.BigAutoField(
+        primary_key=True)
+    customer_country_code = models.CharField(
+        max_length=2)
+    customer_phone_number = models.BigIntegerField(
+        blank=True, null=True)
+    transaction_type = models.CharField(
+        max_length=20, blank=True, null=True)
+    api_transaction_reference = models.CharField(
+        max_length=20, unique=False, null=True)
+    transaction_reference = models.CharField(
+        max_length=12, unique=True, null=False)
+    
     transaction_amount = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     transaction_description = models.CharField(
         max_length=50, blank=True, null=True)
-    date_added = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField(
+        auto_now_add=True)
+    transaction_date = models.DateTimeField(null=True)
+    paid = models.BooleanField(
+        default=False)
+    is_posted=models.BooleanField(default=False)
+    transaction_status = models.CharField(
+        blank=False, max_length=100)
 
     def __str__(self):
         return str(self.customer_phone_number)
@@ -42,19 +56,27 @@ class LipanampesaRequest(models.Model):
     """
     id = models.BigAutoField(primary_key=True)
 
-    customer_phone_number = models.BigIntegerField(blank=True, null=True)
-    customer_country_code = models.CharField(max_length=2)
-    transaction_reference = models.CharField(
+    customer_phone_number = models.BigIntegerField(
+        blank=True, null=True)
+    customer_country_code = models.CharField(
+        max_length=2)
+    api_transaction_reference = models.CharField(
         max_length=20, unique=False, null=True)
-
+    transaction_reference = models.CharField(
+        max_length=12, unique=True, null=False)
     transaction_amount = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     transaction_description = models.CharField(
         max_length=50, blank=True, null=True)
-    transaction_date = models.DateTimeField(null=True)
-    transaction_status = models.CharField(blank=False, max_length=100)
-    date_added = models.DateTimeField(auto_now_add=True)
+    transaction_date = models.DateTimeField(
+        null=True)
+    transaction_status = models.CharField(
+        blank=False, max_length=100)
+    date_added = models.DateTimeField(
+        auto_now_add=True)
+    paid=models.BooleanField(
+        default=False)
 
     def __str__(self):
         return str(self.customer_phone_number)

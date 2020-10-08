@@ -7,7 +7,7 @@ from .receive_payments_queries.query_transaction_details import query_transactio
 from .models import AuthToken
 
 
-@shared_task(name="bearer token")
+@shared_task(name="bearer token", max_retries=10)
 def bearer_token_task():
     """
     Handle generation of accesstoken
@@ -16,7 +16,7 @@ def bearer_token_task():
     return AuthToken.objects.getaccesstoken()
 
 
-@shared_task(name="eazzypaypush_task")
+@shared_task(name="eazzypaypush_task" ,max_retries=10)
 def call_eazzypaaypush_task(
         response,
         mssid,

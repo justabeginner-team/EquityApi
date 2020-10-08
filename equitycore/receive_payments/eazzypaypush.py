@@ -2,6 +2,8 @@ from django.conf import settings
 import json
 from ..http import post
 from ..utils.jengautils import signature
+from ..helpers import reference_id_generator
+from ..models import EazzyPushRequest
 
 merchant_code = settings.MERCHANT_CODE
 
@@ -12,6 +14,7 @@ def eazzypay_push(
         countryCode: str,
         trans_amount: int,
         trans_desc: str,
+        trans_ref: str,
 ):
     """
     fetch a new token
@@ -20,7 +23,7 @@ def eazzypay_push(
     """
 
     trans_type = 'EazzyPayOnline'
-    trans_ref = "000000000002"
+    trans_ref = reference_id_generator()
 
     trans_data = (str(trans_ref), str(trans_amount), merchant_code, countryCode)
     signed_signature = signature(trans_data)
@@ -37,9 +40,14 @@ def eazzypay_push(
     url = f"{settings.UAT_URL}/transaction/v2/payments"
     response = post(url, payload=payload, headers=headers)
     data = json.loads(response.text)
-    pay=dict(
+
+    EazzyPushRequest.objects.update(
+        transaction_type=trans_type, api_transaction_reference=data.get("referenceNumber"),
+        transaction_reference=trans_ref, transaction_status=data.get("status"))
+
+    responseData=dict(
         token=token,
         ref=trans_ref,
         data=data
     )
-    return pay
+    return responseData
