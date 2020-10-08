@@ -27,7 +27,7 @@ class EazzyPushRequest(models.Model):
         max_length=20, unique=False, null=True)
     transaction_reference = models.CharField(
         max_length=12, unique=True, null=False)
-    
+
     transaction_amount = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
@@ -38,7 +38,7 @@ class EazzyPushRequest(models.Model):
     transaction_date = models.DateTimeField(null=True)
     paid = models.BooleanField(
         default=False)
-    is_posted=models.BooleanField(default=False)
+    is_posted = models.BooleanField(default=False)
     transaction_status = models.CharField(
         blank=False, max_length=100)
 
@@ -75,7 +75,7 @@ class LipanampesaRequest(models.Model):
         blank=False, max_length=100)
     date_added = models.DateTimeField(
         auto_now_add=True)
-    paid=models.BooleanField(
+    paid = models.BooleanField(
         default=False)
 
     def __str__(self):

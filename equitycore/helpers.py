@@ -9,10 +9,8 @@ def pk_path():
 
     : ""path to .pem "" :: your current_working_dir/.JengaApi/keys/privatekey.pem
 
-    """   
+    """
     return os.path.join(os.getcwd(), ".JengaApi", "keys", "privatekey.pem")
-    
-
 
 
 def reference_id_generator():

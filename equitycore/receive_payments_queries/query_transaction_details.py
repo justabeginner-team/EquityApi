@@ -11,7 +11,7 @@ def query_transaction(
     This webservice enables an application or service to query a transactions details and status
     :param: token: the bearer token used to access the API
     :param: transaction_id: the payments unique reference/ transaction id
-    :return: JSON
+    :return: JSON response
     """
     payload = {}
     headers = {

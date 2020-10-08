@@ -17,9 +17,15 @@ def eazzypay_push(
         trans_ref: str,
 ):
     """
-    fetch a new token
-    :param: type:
-    :return: JSON
+    Initiate an Eazzypay push request
+
+    :param: token:
+    :param: mssid:
+    :param: CountryCode:
+    :param: trans_amount:
+    :param: trans_desc:
+    :param: trans_ref:
+    :return: response
     """
 
     trans_type = 'EazzyPayOnline'
@@ -45,7 +51,7 @@ def eazzypay_push(
         transaction_type=trans_type, api_transaction_reference=data.get("referenceNumber"),
         transaction_reference=trans_ref, transaction_status=data.get("status"))
 
-    responseData=dict(
+    responseData = dict(
         token=token,
         ref=trans_ref,
         data=data

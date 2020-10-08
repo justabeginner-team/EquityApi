@@ -16,13 +16,14 @@ def bearer_token_task():
     return AuthToken.objects.getaccesstoken()
 
 
-@shared_task(name="eazzypaypush_task" ,max_retries=10)
+@shared_task(name="eazzypaypush_task", max_retries=10)
 def call_eazzypaaypush_task(
         response,
         mssid,
         country_code,
         amount,
         trans_desc,
+        trans_ref
 ):
     """
     Handle eazzypaypush request
@@ -30,9 +31,10 @@ def call_eazzypaaypush_task(
     :param country code:
     :param amount:
     :param transaction_description:
+    :param transaction_reference:
     :return:
     """
-    return eazzypay_push(response, mssid, country_code, amount, trans_desc)
+    return eazzypay_push(response, mssid, country_code, amount, trans_desc, trans_ref)
 
 
 @shared_task(name="lipa_na_mpesa_push")
@@ -58,10 +60,11 @@ def lipa_na_mpesapush_task(
     """
     return lipanampesa(response, mssid, country_code, amount, trans_desc)
 
+
 @shared_task(name="query_transaction")
 def query_transaction_task(
-    response,
-    ):
+        response,
+):
     """
     Handle transaction queries
     :param:response --- 
@@ -69,4 +72,4 @@ def query_transaction_task(
           1. token 
           2. reference id
     """
-    return query_transaction(response["token"],response["ref"])
+    return query_transaction(response["token"], response["ref"])
