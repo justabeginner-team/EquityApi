@@ -4,7 +4,7 @@ from .models import EazzyPushRequest, LipanampesaRequest
 class Jenga:
 
     @staticmethod
-    def eazzypaypush(phone, country_code, amount, trans_ref):
+    def eazzypaypush(phone, country_code, amount, trans_desc, trans_ref):
         """
         Initiates Eazzy Push transaction
         :param phone: user phone to start the Eazzy push e.g. 0765******
@@ -18,7 +18,8 @@ class Jenga:
             customer_phone_number=phone,
             customer_country_code=country_code,
             transaction_amount=amount,
-            transaction_description=trans_ref,
+            transaction_description=trans_desc,
+            transaction_reference=trans_ref
         )
 
     @staticmethod

@@ -2,7 +2,6 @@ from django.conf import settings
 import json
 from ..http import post
 from ..utils.jengautils import signature
-from ..helpers import reference_id_generator
 from ..models import EazzyPushRequest
 
 merchant_code = settings.MERCHANT_CODE
@@ -24,12 +23,10 @@ def eazzypay_push(
     :param: CountryCode:
     :param: trans_amount:
     :param: trans_desc:
-    :param: trans_ref:
     :return: response
     """
 
     trans_type = 'EazzyPayOnline'
-    trans_ref = reference_id_generator()
 
     trans_data = (str(trans_ref), str(trans_amount), merchant_code, countryCode)
     signed_signature = signature(trans_data)

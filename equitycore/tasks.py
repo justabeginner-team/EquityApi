@@ -27,11 +27,11 @@ def call_eazzypaaypush_task(
 ):
     """
     Handle eazzypaypush request
+    :param response:
+    :param trans_desc:
+    :param country_code:
     :param mssid:
-    :param country code:
     :param amount:
-    :param transaction_description:
-    :param transaction_reference:
     :return:
     """
     return eazzypay_push(response, mssid, country_code, amount, trans_desc, trans_ref)
@@ -47,14 +47,14 @@ def lipa_na_mpesapush_task(
 ):
     """
     Handle eazzypaypush request
+    :param trans_desc:
+    :param country_code:
     :param response:
         > returned response content
           1. token
 
     :param mssid:
-    :param country code:
     :param amount:
-    :param transaction_description:
     :return:
         
     """

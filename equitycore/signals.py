@@ -19,6 +19,7 @@ def handle_eazzypaypush_post_save(sender, instance, **Kwargs):
             instance.customer_country_code,
             str(instance.transaction_amount),
             instance.transaction_description,
+            instance.transaction_reference
         ),
         query_transaction_task.s(),
     ).apply_async(queue="eazzypaypush_request")
