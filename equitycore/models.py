@@ -40,7 +40,7 @@ class EazzyPushRequest(models.Model):
         default=False)
     is_posted = models.BooleanField(default=False)
     transaction_status = models.CharField(
-        blank=False, max_length=100)
+        blank=False, null=True, max_length=100)
 
     def __str__(self):
         return str(self.customer_phone_number)
