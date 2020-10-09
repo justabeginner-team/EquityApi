@@ -23,7 +23,7 @@ def bill_payments(
     """
     This API Provides Partners the Capability To Initiate Utility Bill Payments For Goods And Services
 
-    :param: token:
+    :param: token: the bearer token used to access the API
     :param: biller_code: the business number. e.g for ZUKU 32030 is the business number
     :param: country_code: country of the biller account
     :param: bill_reference: invoice/ref number against which the bill will be paid 111222
@@ -31,7 +31,7 @@ def bill_payments(
     :param: bill_currency: currency code of the payment amount in ISO 4217 e.g KES
     :param: payer_name: name of the person making the payment e.g A N.Other
     :param: payer_account: invoice/ref number against which the bill will be paid. same as bill reference e.g 111222
-    :param: payer_reference: A unique 12 digit string and is the payment reference
+    :param: payer_reference: A unique 12 digit string and it is the payer's reference
     :param: payer_mobile_number: payer mobile number e.g 0763000000
     :param: partner_id: partner identifier. This will always be the bank account maintained in jengaHQ
     for BILL PAYMENT APIs e.g 0011547896523

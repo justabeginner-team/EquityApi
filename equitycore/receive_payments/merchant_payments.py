@@ -18,7 +18,7 @@ def merchant_payments(
     """
     This API Provides Partners the Capability To Make Payments For Goods And Services
 
-    :param: token:
+    :param: token: the bearer token used to access the API
     :param: merchant_till: EazzyPay merchant till identifier of the merchant to be paid. e.g 0766000000
     :param: payment_reference: A unique 12 digit string and is the payment reference
     :param: payment_amount: amount to be paid e.g 1000.00
