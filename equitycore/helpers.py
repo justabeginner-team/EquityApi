@@ -19,5 +19,4 @@ def reference_id_generator():
     
     :returns: a string of 12 random unique digits from 000000000001 to 999999999999 with leading zeros i.e 000005678967
     """
-    reference_id = "%0.12d" % random.randint(1, 999999999999)
-    return reference_id
+    return "%0.12d" % random.randint(1, 999999999999)

@@ -18,18 +18,20 @@ def bill_validation(token,
     :param customer_ref_number: the account number at the billers side e.g 111222
     :param amount: the amount to be paid. In some cases this amount will be validated,
     meaning you might not be allowed to overpay or underpay
-    :param amount_currency: the amount's ISO currency eg. KES
+    :param amount_currency: the amount's ISO currency eg. KES,USD,EUR
     :return: Success Response Schema
-    Field Name	            Field Type	Field Description
-    bill	                object	    bill object
-    bill.CustomerRefNumber	string	    bill identifier
-    bill.amount         	string	    bill amount
-    bill.amountCurrency	    string	    bill amount currency
-    bill.name	            string	    bill name
-    bill.status	            boolean	    bill status true or false
-    bill.billStatus	        string
-    createdOn	            string	    bill create date on third party system
-    message	                string	    bill query response message
+    --------------------------------------------------------------------
+    Field Name                |  Field Type |	Field Description
+    ---------------------------------------------------------------------
+    bill	                  |   object    |   bill object
+    bill.CustomerRefNumber    |	  string	|   bill identifier
+    bill.amount               |	  string	|   bill amount
+    bill.amountCurrency	      |   string	|   bill amount currency
+    bill.name	              |   string	|   bill name
+    bill.status	              |   boolean	|   bill status true or false
+    bill.billStatus	          |   string    |
+    createdOn	              |   string	|   bill create date on third party system
+    message	                  |   string	|  bill query response message
 
     Example Response
         {

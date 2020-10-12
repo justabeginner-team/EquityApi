@@ -37,6 +37,7 @@ def bill_payments(
     for BILL PAYMENT APIs e.g 0011547896523
     :param: remarks: remarks of the bill payment
     :return: 200 Success Response Schema
+    
     Field Name	     Field Type	  Field Description
     status	         string	      bill processing status i.e whether SUCCESS or FAILED
     transactionId	 string	      payment transaction id. returned only if payment is successful

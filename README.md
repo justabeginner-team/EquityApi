@@ -59,7 +59,7 @@ CELERY_BROKER_URL = 'amqp://localhost'
 ```bash
 $ python manage.py keypair -gk GEN_KEY  
 ```
-or
+   or
 ```bash
 $ python manage.py keypair --genkey GEN_KEY 
 ```

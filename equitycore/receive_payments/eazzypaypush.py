@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db import transaction
 import json
 from ..http import post
 from ..utils.jengautils import signature
@@ -8,6 +9,7 @@ merchant_code = settings.MERCHANT_CODE
 
 
 def eazzypay_push(
+        pk :int ,
         token: str,
         mssid: int,
         countryCode: str,
@@ -25,7 +27,7 @@ def eazzypay_push(
     :param: trans_desc:
     :return: response
     """
-
+    print(trans_ref)
     trans_type = 'EazzyPayOnline'
 
     trans_data = (str(trans_ref), str(trans_amount), merchant_code, countryCode)
@@ -43,12 +45,20 @@ def eazzypay_push(
     }
 
     url = f"{settings.UAT_URL}/transaction/v2/payments"
-    response = post(url, payload=payload, headers=headers)
-    data = json.loads(response.text)
-
-    EazzyPushRequest.objects.update(
-        transaction_type=trans_type, api_transaction_reference=data.get("referenceNumber"),
-        transaction_reference=trans_ref, transaction_status=data.get("status"))
+    
+    with transaction.atomic():
+        response = post(url, payload=payload, headers=headers)
+        data = json.loads(response.text)
+        user = EazzyPushRequest.objects.select_for_update().get(id=pk)
+        
+        if not user.is_posted:
+            #pass
+                user.transaction_type=trans_type,
+                user.api_transaction_reference=data.get("referenceNumber"),
+                user.transaction_reference=trans_ref,
+                user.transaction_status=data.get("status"),
+                user.is_posted=True
+                user.save()
 
     responseData = dict(
         token=token,

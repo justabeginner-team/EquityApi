@@ -1,5 +1,5 @@
 from django.dispatch import receiver
-from celery import chain
+from celery import chain,chord
 from django.db.models.signals import post_save
 from .models import EazzyPushRequest, LipanampesaRequest
 from .tasks import (
@@ -7,6 +7,7 @@ from .tasks import (
     bearer_token_task, 
     lipa_na_mpesapush_task,
     query_transaction_task,
+    reference_id_generator
 )
 
 
@@ -14,12 +15,14 @@ from .tasks import (
 def handle_eazzypaypush_post_save(sender, instance, **Kwargs):
     chain(
         bearer_token_task.s(),
+        reference_id_generator.s(),
         call_eazzypaaypush_task.s(
+            instance.id,
             str(instance.customer_phone_number),
             instance.customer_country_code,
             str(instance.transaction_amount),
             instance.transaction_description,
-            instance.transaction_reference
+            #instance.transaction_reference
         ),
         query_transaction_task.s(),
     ).apply_async(queue="eazzypaypush_request")

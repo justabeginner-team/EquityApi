@@ -3,7 +3,7 @@ from .jenga import Jenga
 from .receive_payments_queries.query_transaction_details import query_transaction
 from .models import AuthToken
 from .helpers import reference_id_generator
-
+from  .receive_payments.bill_validation import  bill_validation
 
 def accesstoken(request):
     # token = get_token()
@@ -12,14 +12,15 @@ def accesstoken(request):
     # url = "https://uat.jengahq.io/transaction/v2/payment/mpesastkpush"
 
     countryCode = "KE"
-    mssid = "0763181872"
+    mssid = "0764555372"
     amount = "10"
     desc = "eazzy pay push"
     # query = query_transaction(AuthToken.objects.getaccesstoken(), "797969035827")
-    query=reference_id_generator()
+    #query=reference_id_generator()
+    #print(query)
     # print(query)
-    Jenga.eazzypaypush(mssid, countryCode, amount, desc, query)
+    Jenga.eazzypaypush(mssid, countryCode, amount, desc)
     # Jenga.lipanampesapush(mssid,countryCode,amount,desc)
     access = "hallo nigga"
-
+    #bill_validation()
     return HttpResponse(access)
