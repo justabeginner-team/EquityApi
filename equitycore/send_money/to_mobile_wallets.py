@@ -13,20 +13,19 @@ def sign_data(wallet_name, transfer_amount, transfer_currency_code, transfer_ref
     :param transfer_currency_code:
     :param transfer_reference:
     :param source_account_number:
-    :return:
+    :return: A SHA-256 signature to proof that this request is coming from the merchant.
+    Builds a String of concatenated values of the request fields with the following order
     """
     if wallet_name == 'Airtel' or wallet_name == 'Mpesa':
         transaction_data = (str(transfer_amount), str(transfer_currency_code), str(transfer_reference),
                             str(source_account_number))
+        return signature(transaction_data)
 
     elif wallet_name == 'Equitel':
         # Handle signature for transfer to Equitel
         transaction_data = (str(source_account_number), str(transfer_amount),
                             str(transfer_currency_code), str(transfer_reference))
-
-    signed_data = signature(transaction_data)
-
-    return signed_data
+        return signature(transaction_data)
 
 
 def to_mobile_wallets(
