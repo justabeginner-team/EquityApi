@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'equityapi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'payment',
-        'USER': 'alexgathua',
-        'PASSWORD': 'alex9122',
+        'NAME': config("NAME"),
+        'USER': config("USER"),
+        'PASSWORD': config("PASSWORD"),
         'HOST': 'localhost',
         'PORT': '',
     }
