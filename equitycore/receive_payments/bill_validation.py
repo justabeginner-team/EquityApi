@@ -1,7 +1,7 @@
 from django.conf import settings
 import json
 from ..http import post
-from ..utils.jengautils import signature
+
 
 merchant_code = settings.MERCHANT_CODE
 
