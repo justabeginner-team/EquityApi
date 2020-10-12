@@ -29,7 +29,7 @@ def sign_data(wallet_name, transfer_amount, transfer_currency_code, transfer_ref
     return signed_data
 
 
-def mobile_wallets(
+def to_mobile_wallets(
         token,
         source_country_code,
         source_name,
