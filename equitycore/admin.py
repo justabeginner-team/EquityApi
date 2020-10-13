@@ -52,4 +52,4 @@ class LipaNaMpesaRequestAdmin(admin.ModelAdmin):
     search_fields = ("customer_phone_number",
                      "transaction_amount", "date_added", "transaction_date", "customer_country_code")
     list_filter = (("date_added", DateRangeFilter),
-                   ("transaction_date", DateRangeFilter),)
+                    ("transaction_date", DateRangeFilter),)

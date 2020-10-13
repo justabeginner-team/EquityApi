@@ -26,7 +26,7 @@ class EazzyPushRequest(models.Model):
     api_transaction_reference = models.CharField(
         max_length=20, unique=False, null=True)
     transaction_reference = models.CharField(
-        max_length=12, unique=True, null=False)
+        max_length=12, unique=False, null=False)
 
     transaction_amount = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True

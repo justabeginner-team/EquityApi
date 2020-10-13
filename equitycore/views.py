@@ -4,6 +4,9 @@ from .receive_payments_queries.query_transaction_details import query_transactio
 from .models import AuthToken
 from .helpers import reference_id_generator
 from  .receive_payments.bill_validation import  bill_validation
+import equitycore.exceptions as exceptions
+
+
 
 def accesstoken(request):
     # token = get_token()
@@ -19,6 +22,11 @@ def accesstoken(request):
     #query=reference_id_generator()
     #print(query)
     # print(query)
+    
+    
+    
+    
+    #raise exceptions.EazzyPayPushError(str(mssid))
     Jenga.eazzypaypush(mssid, countryCode, amount, desc)
     # Jenga.lipanampesapush(mssid,countryCode,amount,desc)
     access = "hallo nigga"
