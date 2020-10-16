@@ -1,13 +1,18 @@
 from django.dispatch import receiver
 from celery import chain,chord
 from django.db.models.signals import post_save
-from .models import EazzyPushRequest, LipanampesaRequest
+from .models import (
+    EazzyPushRequest,
+    LipanampesaRequest,
+    MerchantRequest
+    )
 from .tasks import (
     call_eazzypaaypush_task, 
     bearer_token_task, 
     lipa_na_mpesapush_task,
     query_transaction_task,
-    reference_id_generator
+    reference_id_generator,
+    merchant_payment_task,
 )
 
 
@@ -39,3 +44,17 @@ def handle_lipa_na_mpesa_post_save(sender, instance, **Kwargs):
             instance.transaction_description,
         ),
     ).apply_async(queue="lipanampesa_request")
+
+@receiver(post_save,sender=MerchantRequest)
+def handle_merchant_request(sender,instance,**Kwargs):
+    chain(
+        bearer_token_task.s(),
+        reference_id_generator.s(),
+        merchant_payment_task.s(
+            str(instance.partner_id),
+            str(instance.merchant_till),
+            str(instance.currency),
+            str(instance.transaction_amount),
+            str(instance.partner_reference),
+        )
+    ).apply_async(queue="merchant_request")

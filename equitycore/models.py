@@ -84,3 +84,41 @@ class LipanampesaRequest(models.Model):
     class Meta:
         db_table = "tbl_lipanampesaonline_push"
         verbose_name_plural = "LipaNaMpesaOnline Requests"
+
+class MerchantRequest(models.Model):
+    """
+        Handles Merchants Requests
+    """
+    id = models.BigAutoField(primary_key=True)
+
+    partner_id = models.BigIntegerField(
+        blank=True, null=True)
+    merchant_till=models.CharField(
+        max_length=12,null=False)
+    currency = models.CharField(
+        max_length=4)
+    partner_reference=models.CharField(max_length=15)
+    api_transaction_reference = models.CharField(
+        max_length=20, unique=False, null=True)
+    transaction_reference = models.CharField(
+        max_length=12, unique=False, null=False)
+    transaction_amount = models.DecimalField(
+        max_digits=20, decimal_places=2, blank=True, null=True
+    )
+    transaction_date = models.DateTimeField(
+        null=True)
+    transaction_status = models.CharField(
+        blank=False, max_length=100)
+    date_added = models.DateTimeField(
+        auto_now_add=True)
+    is_posted = models.BooleanField(default=False)
+    paid = models.BooleanField(
+        default=False)
+    
+
+    def __str__(self):
+        return str(self.partner_id)
+
+    class Meta:
+        db_table = "tbl_merchant_payment"
+        verbose_name_plural = "Merchant Requests"

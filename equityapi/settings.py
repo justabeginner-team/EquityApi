@@ -79,9 +79,9 @@ DATABASES = {
     },
     'alternate':{
           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config("NAME"),
-           'USER': config("USER"),
-           'PASSWORD': config("PASSWORD"),
+           'NAME': config("DB_NAME"),
+           'USER': config("DB_USER"),
+           'PASSWORD': config("DB_PASSWORD"),
            'HOST': 'localhost',
            'PORT': '',
         }
@@ -140,5 +140,5 @@ TOKEN_THRESHOLD = config('TOKEN_THRESHOLD')
 
 
 CELERY_BROKER_URL = 'amqp://localhost'
-CELERY_TASK_SOFT_TIME_LIMIT=60
-CELERY_CACHE_BACKEND = 'django-cache'
+#CELERY_TASK_SOFT_TIME_LIMIT=60
+#CELERY_CACHE_BACKEND = 'django-cache'

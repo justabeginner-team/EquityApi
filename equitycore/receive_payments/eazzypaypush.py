@@ -49,6 +49,7 @@ def eazzypay_push(
     with transaction.atomic():
         response = post(url, payload=payload, headers=headers)
         data = json.loads(response.text)
+        
         user = EazzyPushRequest.objects.select_for_update().get(id=pk)
         
         if not user.is_posted:

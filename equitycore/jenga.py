@@ -1,11 +1,16 @@
-from .models import EazzyPushRequest, LipanampesaRequest
+from .models import EazzyPushRequest, LipanampesaRequest,MerchantRequest
 import equitycore.exceptions  as exceptions
 
 
 class Jenga:
 
     @staticmethod
-    def eazzypaypush(phone, country_code, amount, trans_desc):
+    def eazzypaypush(
+        phone, 
+        country_code, 
+        amount, 
+        trans_desc
+        ):
         """
         Initiates Eazzy Push transaction
         :param phone: user phone to start the Eazzy push e.g. 0765******
@@ -27,7 +32,12 @@ class Jenga:
             raise exceptions.EazzyPayPushError(str(ex))
         
     @staticmethod
-    def lipanampesapush(phone, country_code, amount, trans_desc):
+    def lipanampesapush(
+        phone, 
+        country_code, 
+        amount, 
+        trans_desc
+        ):
         """
         Initiates Eazzy Push transaction
         :param phone: user phone to start the Eazzy push e.g. 0765******
@@ -44,5 +54,28 @@ class Jenga:
             transaction_amount=amount,
             transaction_description=trans_desc,
         )
+        except Exception as ex:
+            raise exceptions.MpesaStkPushError(str(ex))
+
+    @staticmethod
+    def merchant(
+        cust_phone,
+        merchant_till,
+        currency, 
+        amount,
+        account_number ="1100161816677",
+        ):
+        """
+        
+        """
+
+        try:
+            MerchantRequest.objects.create(
+                    partner_id=account_number,
+                    partner_reference=cust_phone,
+                    transaction_amount=amount,
+                    currency=currency,
+                    merchant_till=merchant_till,
+                )
         except Exception as ex:
             raise exceptions.MpesaStkPushError(str(ex))

@@ -5,6 +5,7 @@ from celery import shared_task
 
 from .receive_payments.eazzypaypush import eazzypay_push
 from .receive_payments.lipanampesa import lipanampesa
+from .receive_payments.merchant_payments import merchant_payments
 from .receive_payments_queries.query_transaction_details import query_transaction
 from .models import AuthToken
 
@@ -31,7 +32,7 @@ def reference_id_generator(response):
     return data
 
 
-@shared_task(name="bearer token", max_retries=10)
+@shared_task(name="bearer token")
 def bearer_token_task():
     """
     Handle generation of accesstoken
@@ -40,7 +41,7 @@ def bearer_token_task():
     return AuthToken.objects.getaccesstoken()
 
 
-@shared_task(name="eazzypaypush_task", max_retries=10)
+@shared_task(name="eazzypaypush_task", max_retries=10, acks_late=True)
 def call_eazzypaaypush_task(
         response,
         pk,
@@ -100,3 +101,23 @@ def query_transaction_task(
           2. reference id
     """
     return query_transaction(response["token"], response["ref"])
+
+@shared_task(name="merchant_payment")
+def merchant_payment_task(
+    response,
+    partner_id,
+    merchant_till,
+    currency,
+    amount,
+    partner_reference,
+
+):
+    return merchant_payments(
+        response["token"],
+        merchant_till,
+        response["ref_id"],
+        amount,
+        currency,
+        partner_id,
+        partner_reference,
+        )
