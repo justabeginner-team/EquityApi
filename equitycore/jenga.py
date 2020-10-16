@@ -1,5 +1,5 @@
 from .models import EazzyPushRequest, LipanampesaRequest
-import equitycore.exceptions  as exceptions
+import equitycore.exceptions as exceptions
 
 
 class Jenga:
@@ -16,16 +16,16 @@ class Jenga:
         """
 
         try:
-             EazzyPushRequest.objects.create(
-            customer_phone_number=phone,
-            customer_country_code=country_code,
-            transaction_amount=amount,
-            transaction_description=trans_desc,
-            #transaction_reference=trans_ref
-        )
+            EazzyPushRequest.objects.create(
+                customer_phone_number=phone,
+                customer_country_code=country_code,
+                transaction_amount=amount,
+                transaction_description=trans_desc,
+                # transaction_reference=trans_ref
+            )
         except Exception as ex:
             raise exceptions.EazzyPayPushError(str(ex))
-        
+
     @staticmethod
     def lipanampesapush(phone, country_code, amount, trans_desc):
         """
@@ -38,11 +38,11 @@ class Jenga:
         """
 
         try:
-             LipanampesaRequest.objects.create(
-            customer_phone_number=phone,
-            customer_country_code=country_code,
-            transaction_amount=amount,
-            transaction_description=trans_desc,
-        )
+            LipanampesaRequest.objects.create(
+                customer_phone_number=phone,
+                customer_country_code=country_code,
+                transaction_amount=amount,
+                transaction_description=trans_desc,
+            )
         except Exception as ex:
             raise exceptions.MpesaStkPushError(str(ex))
