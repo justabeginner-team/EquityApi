@@ -1,37 +1,102 @@
-## Welcome to GitHub Pages
+# EquityApi (Jenga-Api) ![Labeler](https://github.com/justabeginner-team/EquityApi/workflows/Labeler/badge.svg)
 
-You can use the [editor on GitHub](https://github.com/justabeginner-team/EquityApi/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Documentation
+## Getting Started
+Before installing the package get your Jenga API credentials by creating an account [here.](https://developer.jengaapi.io)
+## Installation
+1. Create a new virtual environment:
+    - If using vanilla [virtualenv](https://virtualenv.pypa.io/en/latest/), run `virtualenv venv` and then `source venv/bin/activate`
+    - If using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/), run `mkvirtualenv venv`
+2. Install equity-jenga-api
+```bash
+# In terminal do:
+pip install equity-jenga-api
+```
+3. Are you a developer? Run the following commands to build from source:-
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+```bash
+$ git clone 
+$ cd equity-jenga-api
+```
+4. Configure your settings.py as follows:
+Get to know how to use python-decouple [here.](https://simpleisbetterthancomplex.com/2015/11/26/package-of-the-week-python-decouple.html)
+ ```python
+from decouple import config
 
-### Markdown
+INSTALLED_APPS = [
+    # ...
+    'equity-jenga-api']
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+'''
+Configure the following at the bottom of your settings.py
+'''
 
-```markdown
-Syntax highlighted code block
+# generated password in jengahq
+PASSWORD = config('PASSWORD')
 
-# Header 1
-## Header 2
-### Header 3
+# generated merchant code from jengahq
+MERCHANT_CODE = config('MERCHANT_CODE')
 
-- Bulleted
-- List
+# generated api key from jengahq
+API_KEY = config('API_KEY')
 
-1. Numbered
-2. List
+# Environment is either sandbox or production
+ENVIRONMENT = config('ENVIRONMENT')
 
-**Bold** and _Italic_ and `Code` text
+# base url for api endpoints
+UAT_URL = config('UAT_URL')
+PRODUCTION_URL = config('PRODUCTION_URL')
 
-[Link](url) and ![Image](src)
+# allows to generate a new token before the it expires minus threshold is over, set this value to 600
+TOKEN_THRESHOLD = config('TOKEN_THRESHOLD')
+
+
+CELERY_BROKER_URL = 'amqp://localhost'
+```
+## Configuration
+1. Generate your set of public and private keys which will be stored in a file .JengaApi in the root of your project:
+  run this command on the terminal.
+```bash
+$ python manage.py keypair -gk GEN_KEY  
+```
+   or
+```bash
+$ python manage.py keypair --genkey GEN_KEY 
+```
+2. To generate a signature pass arguments to the signature function and obtain a tuple 
+  
+ ```python
+
+from equitycore.jenga import signature
+
+# assuming you have a variable fields set it to be a tuple of arguments to be signed in their appropriate order
+fields=()
+signed_data=signature(fields)
+``` 
+3. To generate a token:
+```console
+# run the following in the terminal
+python manage.py shell
+
+# imports AuthToken
+from equitycore.models import AuthToken
+
+# gets token
+AuthToken.objects.getaccesstoken()
+``` 
+4. Celery worker to run background tasks.
+- We have seen it best to use celery to run payments as background tasks, get up-to speed on celery [here](https://docs.celeryproject.org/en/latest/django/first-steps-with-django.html):-
+- Run this command on a separate terminal
+```bash
+ $ celery -A equityapi worker -l info -Q eazzypaypush_request,celery,lipanampesa_request,merchant_request
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+# Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-### Jekyll Themes
+Please make sure to update tests as appropriate.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/justabeginner-team/EquityApi/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+# Support
 
-### Support or Contact
+# Licence
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
