@@ -10,7 +10,8 @@ def bill_validation(token,
                     biller_code,
                     customer_ref_number,
                     amount,
-                    amount_currency, ):
+                    amount_currency
+                    ):
     """
 
     :param token: the bearer token used to access the API

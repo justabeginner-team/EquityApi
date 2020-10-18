@@ -164,3 +164,29 @@ class BillPaymentRequest(models.Model):
     class Meta:
         db_table = "tbl_bill_payments"
         verbose_name_plural = "Bill Payment Requests"
+
+
+class BillValidationRequest(models.Model):
+    """Handles Bill Validation Request"""
+    id = models.BigAutoField(primary_key=True)
+    biller_code = models.CharField(
+        max_length=12, null=False)
+    customer_reference_number = models.CharField(
+        max_length=12, null=False)
+    bill_amount = models.DecimalField(
+        max_digits=20, decimal_places=2, blank=True, null=True
+    )
+    bill_currency = models.CharField(
+        max_length=4)
+    transaction_date = models.DateTimeField(
+        null=True)
+    is_posted = models.BooleanField(default=False)
+    validated = models.BooleanField(
+        default=False)
+
+    def __str__(self):
+        return str(self.partner_id)
+
+    class Meta:
+        db_table = "tbl_bill_validation"
+        verbose_name_plural = "Bill Validation Requests"
