@@ -4,7 +4,8 @@ from django.db.models.signals import post_save
 from .models import (
     EazzyPushRequest,
     LipanampesaRequest,
-    MerchantRequest
+    MerchantRequest,
+    BillPaymentRequest
 )
 from .tasks import (
     call_eazzypaaypush_task,
@@ -13,6 +14,7 @@ from .tasks import (
     query_transaction_task,
     reference_id_generator,
     merchant_payment_task,
+    bill_payment_task,
 )
 
 
@@ -59,3 +61,26 @@ def handle_merchant_request(sender, instance, **Kwargs):
             str(instance.partner_reference),
         )
     ).apply_async(queue="merchant_request")
+
+@receiver(post_save,sender=BillPaymentRequest)
+def handle_bill_payment_request(sender,instance,**Kwargs):
+    chain(
+        bearer_token_task.s(),
+        reference_id_generator.s(),
+        bill_payment_task.s(
+            str(instance.biller_code),
+            str(instance.country_code),
+            str(instance.bill_ref),
+            str(instance.bill_amount),
+            str(instance.bill_currency),
+            str(instance.payer_account),
+            str(instance.payer_name),
+            str(instance.payer_account),
+            str(instance.payer_mobile_number),
+            str(instance.partner_id),
+            str(instance.remarks),
+            
+           
+        )
+        
+    ).apply_async(queue="bill_request")

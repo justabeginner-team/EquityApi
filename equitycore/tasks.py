@@ -6,6 +6,7 @@ from celery import shared_task
 from .receive_payments.eazzypaypush import eazzypay_push
 from .receive_payments.lipanampesa import lipanampesa
 from .receive_payments.merchant_payments import merchant_payments
+from .receive_payments.bill_payments import bill_payments
 from .receive_payments_queries.query_transaction_details import query_transaction
 from .models import AuthToken
 
@@ -134,3 +135,34 @@ def merchant_payment_task(
         partner_reference,
     )
 
+
+@shared_task(name="merchant_payment")
+def merchant_payment_task(
+        response,
+        biller_code,
+        country_code,
+        bill_reference,
+        bill_amount,
+        bill_currency,
+        payer_reference,
+        payer_name,
+        payer_account,
+        payer_mobile_number,
+        partner_id,
+        remarks
+    ):
+    return bill_payments(
+        response["token"],
+        biller_code,
+        country_code,
+        bill_reference,
+        bill_amount,
+        bill_currency,
+        payer_name,
+        payer_account,
+        response["ref_id"],
+        payer_mobile_number,
+        partner_id,
+        remarks
+    
+        )
