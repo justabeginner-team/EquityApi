@@ -76,6 +76,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'alternate': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASSWORD"),
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -130,5 +138,6 @@ PRODUCTION_URL = config('PRODUCTION_URL')
 # allows to generate a new token before the it expires minus threshold is over
 TOKEN_THRESHOLD = config('TOKEN_THRESHOLD')
 
-
 CELERY_BROKER_URL = 'amqp://localhost'
+# CELERY_TASK_SOFT_TIME_LIMIT=60
+# CELERY_CACHE_BACKEND = 'django-cache'

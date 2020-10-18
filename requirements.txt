@@ -22,6 +22,7 @@ msgpack==0.6.2
 packaging==20.3
 pep517==0.8.2
 progress==1.5
+psycopg2==2.8.6
 pycryptodome==3.9.8
 pyparsing==2.4.6
 python-decouple==3.3

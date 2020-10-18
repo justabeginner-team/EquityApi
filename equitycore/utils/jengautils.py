@@ -20,13 +20,14 @@ def get_token():
     """
 
     url = f"{settings.UAT_URL}/identity/v2/token"
+    
     payload = dict(
         username=settings.MERCHANT_CODE,
         password=settings.PASSWORD,
     )
 
     headers = {
-        "authorization": f"{settings.API_KEY}",
+        "authorization": "Basic ck1wUkdNblVCQ2d4SGVhREk5eXBXTVJmV3RQNHJIQVU6UU10ZU1Xb0dwWmlERkpxUQ==",
         "Content-Type": "application/x-www-form-urlencoded",
     }
 

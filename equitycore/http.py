@@ -15,4 +15,17 @@ def post(url, headers, payload):
     return response
 
 
+def get(url, headers, payload):
+    """
+    Get a response from a given api endpoint
+    :param url:
+    :param headers:
+    :param payload:
+    :return:
+    
+    """
+    response = requests.request("GET", url=url, data=payload, headers=headers)
+
+    return response
+
 

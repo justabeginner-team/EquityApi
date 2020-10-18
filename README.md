@@ -1,8 +1,8 @@
 # EquityApi (Jenga-Api) ![Labeler](https://github.com/justabeginner-team/EquityApi/workflows/Labeler/badge.svg)
 
 # Documentation
-# Getting Started
-Before installing the package get your Jenga API credentials by creating an account [here](https://developer.jengaapi.io)
+## Getting Started
+Before installing the package get your Jenga API credentials by creating an account [here.](https://developer.jengaapi.io)
 ## Installation
 1. Create a new virtual environment:
     - If using vanilla [virtualenv](https://virtualenv.pypa.io/en/latest/), run `virtualenv venv` and then `source venv/bin/activate`
@@ -19,7 +19,7 @@ $ git clone
 $ cd equity-jenga-api
 ```
 4. Configure your settings.py as follows:
-Get to know how to use python-decouple [here](https://simpleisbetterthancomplex.com/2015/11/26/package-of-the-week-python-decouple.html)
+Get to know how to use python-decouple [here.](https://simpleisbetterthancomplex.com/2015/11/26/package-of-the-week-python-decouple.html)
  ```python
 from decouple import config
 
@@ -47,19 +47,19 @@ ENVIRONMENT = config('ENVIRONMENT')
 UAT_URL = config('UAT_URL')
 PRODUCTION_URL = config('PRODUCTION_URL')
 
-# allows to generate a new token before the it expires minus threshold is over
+# allows to generate a new token before the it expires minus threshold is over, set this value to 600
 TOKEN_THRESHOLD = config('TOKEN_THRESHOLD')
 
 
 CELERY_BROKER_URL = 'amqp://localhost'
 ```
 ## Configuration
-1. Generate your set of public and private keys:
+1. Generate your set of public and private keys which will be stored in a file .JengaApi in the root of your project:
   run this command on the terminal.
 ```bash
 $ python manage.py keypair -gk GEN_KEY  
 ```
-or
+   or
 ```bash
 $ python manage.py keypair --genkey GEN_KEY 
 ```
@@ -74,7 +74,7 @@ fields=()
 signed_data=signature(fields)
 ``` 
 3. To generate a token:
-```python
+```console
 # run the following in the terminal
 python manage.py shell
 
@@ -85,10 +85,10 @@ from equitycore.models import AuthToken
 AuthToken.objects.getaccesstoken()
 ``` 
 4. Celery worker to run background tasks.
-- We have seen it best to use celery to run payment tasks, get upto speed on celery [here]():-
-- run this command on a seperate terminal
-```python
- $ celery -A equityapi worker -l info -Q eazzypaypush_request,celery,lipanampesa_request
+- We have seen it best to use celery to run payments as background tasks, get up-to speed on celery [here](https://docs.celeryproject.org/en/latest/django/first-steps-with-django.html):-
+- Run this command on a separate terminal
+```bash
+ $ celery -A equityapi worker -l info -Q eazzypaypush_request,celery,lipanampesa_request,merchant_request
 ```
 
 # Contributing
