@@ -56,17 +56,15 @@ def merchant_payments(
                 "transactionId": "931118931118"
             }
 """
-           
-    
 
     transaction_data = (
-        str(merchant_till), 
-        str(partner_id), 
+        str(merchant_till),
+        str(partner_id),
         str(payment_amount),
-        str(payment_currency), 
+        str(payment_currency),
         str(payment_reference)
-        )
-    
+    )
+
     signed_data = signature(transaction_data)
     headers = {
         'Authorization': token,
@@ -79,13 +77,12 @@ def merchant_payments(
               "\"partner\":{{\r\n \"id\":\"{4}\", \r\n \"ref\":\"{5}\" \r\n}}" \
               " \r\n}}".format(
                                 merchant_till,
-                                payment_reference, 
-                                payment_amount, 
+                                payment_reference,
+                                payment_amount,
                                 payment_currency,
-                                partner_id, 
+                                partner_id,
                                 partner_reference
-                                )
-
+                            )
 
     url = f"{settings.UAT_URL}/transaction/v2/tills/pay"
     response = post(url, payload=payload, headers=headers)

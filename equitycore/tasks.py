@@ -132,8 +132,5 @@ def merchant_payment_task(
         currency,
         partner_id,
         partner_reference,
-<<<<<<< HEAD
-        )
-=======
     )
->>>>>>> 26d5c557cbc02214b74da14e666f68436616cb4d
+
