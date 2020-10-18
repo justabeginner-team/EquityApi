@@ -31,6 +31,13 @@ def merchant_payments(
     status	        string	    SUCCESS or FAILURE
     merchantName	string	    name of merchant receiving the payment
     transactionId	string	    payment transaction id
+
+    Example
+    {
+        "status": "SUCCESS",
+        "merchantName": "A N Other",
+        "transactionId": "931118931118"
+    }
     """
 
     transaction_data = (
@@ -49,7 +56,7 @@ def merchant_payments(
     }
     payload = "{{\r\n" \
               "\"merchant\":{{\r\n \"till\":\"{0}\" \r\n}}," \
-              "\"payment\":{{\r\n \"ref\":\"{1}\", \r\n \"amount\":\"{2}\", \r\n \"currency\":\"{3}\", \r\n}}," \
+              "\"payment\":{{\r\n \"ref\":\"{1}\", \r\n \"amount\":\"{2}\", \r\n \"currency\":\"{3}\" \r\n}}," \
               "\"partner\":{{\r\n \"id\":\"{4}\", \r\n \"ref\":\"{5}\" \r\n}}" \
               " \r\n}}".format(
                                 merchant_till,

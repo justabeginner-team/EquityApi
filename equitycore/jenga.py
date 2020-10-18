@@ -59,7 +59,7 @@ class Jenga:
 
     @staticmethod
     def merchant(
-            cust_phone,
+            customer_phone,
             merchant_till,
             currency,
             amount,
@@ -72,7 +72,7 @@ class Jenga:
         try:
             MerchantRequest.objects.create(
                 partner_id=account_number,
-                partner_reference=cust_phone,
+                partner_reference=customer_phone,
                 transaction_amount=amount,
                 currency=currency,
                 merchant_till=merchant_till,
