@@ -49,8 +49,15 @@ def merchant_payments(
             "ref":"0711521508" 
             } 
         }
+     Example of response::
+            {
+                "status": "SUCCESS",
+                "merchantName": "A N Other",
+                "transactionId": "931118931118"
+            }
+"""
+           
     
-    """
 
     transaction_data = (
         str(merchant_till), 
@@ -68,7 +75,7 @@ def merchant_payments(
     }
     payload = "{{\r\n" \
               "\"merchant\":{{\r\n \"till\":\"{0}\" \r\n}}," \
-              "\"payment\":{{\r\n \"ref\":\"{1}\", \r\n \"amount\":\"{2}\", \r\n \"currency\":\"{3}\", \r\n}}," \
+              "\"payment\":{{\r\n \"ref\":\"{1}\", \r\n \"amount\":\"{2}\", \r\n \"currency\":\"{3}\" \r\n}}," \
               "\"partner\":{{\r\n \"id\":\"{4}\", \r\n \"ref\":\"{5}\" \r\n}}" \
               " \r\n}}".format(
                                 merchant_till,

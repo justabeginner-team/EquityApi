@@ -1,4 +1,4 @@
-from .models import EazzyPushRequest, LipanampesaRequest,MerchantRequest
+from .models import EazzyPushRequest, LipanampesaRequest, MerchantRequest
 import equitycore.exceptions  as exceptions
 
 
@@ -6,11 +6,11 @@ class Jenga:
 
     @staticmethod
     def eazzypaypush(
-        phone, 
-        country_code, 
-        amount, 
-        trans_desc
-        ):
+            phone,
+            country_code,
+            amount,
+            trans_desc
+    ):
         """
         Initiates Eazzy Push transaction
         :param phone: user phone to start the Eazzy push e.g. 0765******
@@ -33,11 +33,11 @@ class Jenga:
 
     @staticmethod
     def lipanampesapush(
-        phone, 
-        country_code, 
-        amount, 
-        trans_desc
-        ):
+            phone,
+            country_code,
+            amount,
+            trans_desc
+    ):
         """
         Initiates Eazzy Push transaction
         :param phone: user phone to start the Eazzy push e.g. 0765******

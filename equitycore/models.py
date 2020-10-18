@@ -18,7 +18,7 @@ class EazzyPushRequest(models.Model):
     id = models.BigAutoField(
         primary_key=True)
     customer_country_code = models.CharField(
-        max_length=2)
+        max_length=3)
     customer_phone_number = models.BigIntegerField(
         blank=True, null=True)
     transaction_type = models.CharField(
@@ -59,7 +59,7 @@ class LipanampesaRequest(models.Model):
     customer_phone_number = models.BigIntegerField(
         blank=True, null=True)
     customer_country_code = models.CharField(
-        max_length=2)
+        max_length=3)
     api_transaction_reference = models.CharField(
         max_length=20, unique=False, null=True)
     transaction_reference = models.CharField(
@@ -85,6 +85,7 @@ class LipanampesaRequest(models.Model):
         db_table = "tbl_lipanampesaonline_push"
         verbose_name_plural = "LipaNaMpesaOnline Requests"
 
+
 class MerchantRequest(models.Model):
     """
         Handles Merchants Requests
@@ -93,11 +94,11 @@ class MerchantRequest(models.Model):
 
     partner_id = models.BigIntegerField(
         blank=True, null=True)
-    merchant_till=models.CharField(
-        max_length=12,null=False)
+    merchant_till = models.CharField(
+        max_length=12, null=False)
     currency = models.CharField(
         max_length=4)
-    partner_reference=models.CharField(max_length=15)
+    partner_reference = models.CharField(max_length=15)
     api_transaction_reference = models.CharField(
         max_length=20, unique=False, null=True)
     transaction_reference = models.CharField(
@@ -114,7 +115,6 @@ class MerchantRequest(models.Model):
     is_posted = models.BooleanField(default=False)
     paid = models.BooleanField(
         default=False)
-    
 
     def __str__(self):
         return str(self.partner_id)
@@ -122,3 +122,45 @@ class MerchantRequest(models.Model):
     class Meta:
         db_table = "tbl_merchant_payment"
         verbose_name_plural = "Merchant Requests"
+
+
+class BillPaymentRequest(models.Model):
+    """Handles Bill Payments"""
+    id = models.BigAutoField(primary_key=True)
+    biller_code = models.CharField(
+        max_length=12, null=False)
+    country_code = models.CharField(
+        max_length=3)
+    bill_reference = models.CharField(
+        max_length=12, null=False)  # same as payer_account
+    bill_amount = models.DecimalField(
+        max_digits=20, decimal_places=2, blank=True, null=True
+    )
+    bill_currency = models.CharField(
+        max_length=4)
+    payer_name = models.CharField(max_length=60)
+    payer_reference = models.CharField(
+        max_length=12, unique=False, null=False)
+    payer_mobile_number = models.CharField(
+        max_length=12, null=False)
+    partner_id = models.BigIntegerField(
+        blank=True, null=True)
+    remarks = models.TextField()
+    transaction_date = models.DateTimeField(
+        null=True)
+    transaction_status = models.CharField(
+        blank=False, max_length=100)
+    date_added = models.DateTimeField(
+        auto_now_add=True)
+    api_transaction_reference = models.CharField(
+        max_length=20, unique=False, null=True)
+    is_posted = models.BooleanField(default=False)
+    paid = models.BooleanField(
+        default=False)
+
+    def __str__(self):
+        return str(self.partner_id)
+
+    class Meta:
+        db_table = "tbl_bill_payments"
+        verbose_name_plural = "Bill Payment Requests"

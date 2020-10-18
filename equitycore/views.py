@@ -13,15 +13,15 @@ def accesstoken(request):
 
     # url = "https://uat.jengahq.io/transaction/v2/payment/mpesastkpush"
 
-    countryCode = "0766000000"
-    mssid = "0711521508"
+    merchant_till = "0764555372"
+    mssid = "987654321"
     amount = "10"
     desc = "eazzy pay push"
-    curr="KES"
-    #from .utils.jengautils import get_token
-    #print(get_token())
-    #raise exceptions.EazzyPayPushError(str(mssid))
-    Jenga.merchant(mssid, countryCode,curr, amount)
+    curr = "KES"
+    # from .utils.jengautils import get_token
+    # print(get_token())
+    # raise exceptions.EazzyPayPushError(str(mssid))
+    Jenga.merchant(mssid, merchant_till, curr, amount)
     # Jenga.lipanampesapush(mssid,countryCode,amount,desc)
     access = "hallo nigga"
     # bill_validation()

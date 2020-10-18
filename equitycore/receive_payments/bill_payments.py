@@ -43,7 +43,12 @@ def bill_payments(
     transactionId	 string	      payment transaction id. returned only if payment is successful
     """
 
-    transaction_data = (str(biller_code), str(bill_amount), str(payer_reference), str(partner_id))
+    transaction_data = (
+                    str(biller_code), 
+                    str(bill_amount), 
+                    str(payer_reference), 
+                    str(partner_id)
+                    )
     signed_data = signature(transaction_data)
     headers = {
         'Authorization': token,
@@ -56,13 +61,28 @@ def bill_payments(
               "\"payer\":{{\r\n \"name\":\"{6}\", \r\n \"account\":\"{7}\", \r\n \"reference\":\"{8}\", " \
               "\r\n \"mobileNumber\":\"{9}\", \r\n}}," \
               "\"partnerId\":\"{10}\"," \
-              "\"remarks\":\"{11}\" \r\n}}".format(biller_code, country_code, bill_reference, bill_amount,
-                                                   bill_currency, payer_name, payer_account, payer_account,
-                                                   payer_reference, payer_mobile_number, partner_id, remarks)
+              "\"remarks\":\"{11}\" \r\n}}".format(
+                                                   biller_code, 
+                                                   country_code, 
+                                                   bill_reference, 
+                                                   bill_amount,
+                                                   bill_currency, 
+                                                   payer_name, 
+                                                   payer_account, 
+                                                   payer_account,
+                                                   payer_reference, 
+                                                   payer_mobile_number, 
+                                                   partner_id,
+                                                   remarks
+                                                    )
 
     print(payload)
     url = f"{settings.UAT_URL}/transaction/v2/bills/pay"
-    response = post(url, payload=payload, headers=headers)
+    response = post(
+                    url, 
+                    payload=payload, 
+                    headers=headers
+                    )
     data = json.loads(response.text)
 
     response_data = dict(
