@@ -88,7 +88,11 @@ AuthToken.objects.getaccesstoken()
 - We have seen it best to use celery to run payments as background tasks, get up-to speed on celery [here](https://docs.celeryproject.org/en/latest/django/first-steps-with-django.html):-
 - Run this command on a separate terminal
 ```bash
+<<<<<<< HEAD
+ $ celery -A equityapi worker -l info -Q eazzypaypush_request,celery,lipanampesa_request,merchant_request
+=======
  $ celery -A equityapi worker -l info -Q eazzypaypush_request,celery,lipanampesa_request, merchant_request
+>>>>>>> 26d5c557cbc02214b74da14e666f68436616cb4d
 ```
 
 # Contributing

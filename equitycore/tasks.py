@@ -113,6 +113,17 @@ def merchant_payment_task(
         partner_reference,
 
 ):
+    """
+    Handle merchant request
+    :param response from previous task in a sequence:
+    :param partner_id:
+    :param merchant_till:
+    :param currency:
+    :param amount:
+    :param partner_reference:
+    :return:
+    """
+    print(response["ref_id"])
     return merchant_payments(
         response["token"],
         merchant_till,
@@ -121,4 +132,8 @@ def merchant_payment_task(
         currency,
         partner_id,
         partner_reference,
+<<<<<<< HEAD
+        )
+=======
     )
+>>>>>>> 26d5c557cbc02214b74da14e666f68436616cb4d

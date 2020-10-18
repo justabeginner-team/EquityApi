@@ -59,23 +59,23 @@ class Jenga:
 
     @staticmethod
     def merchant(
-            customer_phone,
-            merchant_till,
-            currency,
-            amount,
-            account_number="1100161816677",
-    ):
+        cust_phone,
+        merchant_till,
+        currency, 
+        amount,
+        account_number="0011547896523",
+        ):
         """
         
         """
 
         try:
             MerchantRequest.objects.create(
-                partner_id=account_number,
-                partner_reference=customer_phone,
-                transaction_amount=amount,
-                currency=currency,
-                merchant_till=merchant_till,
-            )
+                    partner_id=str(account_number),
+                    partner_reference=cust_phone,
+                    transaction_amount=amount,
+                    currency=currency,
+                    merchant_till=merchant_till,
+                )
         except Exception as ex:
             raise exceptions.MpesaStkPushError(str(ex))
