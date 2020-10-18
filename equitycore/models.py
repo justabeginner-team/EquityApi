@@ -178,6 +178,8 @@ class BillValidationRequest(models.Model):
     )
     bill_currency = models.CharField(
         max_length=4)
+    date_added = models.DateTimeField(
+        auto_now_add=True)
     transaction_date = models.DateTimeField(
         null=True)
     is_posted = models.BooleanField(default=False)
@@ -185,7 +187,7 @@ class BillValidationRequest(models.Model):
         default=False)
 
     def __str__(self):
-        return str(self.partner_id)
+        return str(self.customer_reference_number)
 
     class Meta:
         db_table = "tbl_bill_validation"
