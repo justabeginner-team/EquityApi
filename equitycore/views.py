@@ -17,11 +17,11 @@ def accesstoken(request):
     mssid = "0711521508"
     amount = "10"
     desc = "eazzy pay push"
-    curr="KES"
-    #from .utils.jengautils import get_token
-    #print(get_token())
-    #raise exceptions.EazzyPayPushError(str(mssid))
-    Jenga.merchant(mssid, countryCode,curr, amount)
+    curr = "KES"
+    # from .utils.jengautils import get_token
+    # print(get_token())
+    # raise exceptions.EazzyPayPushError(str(mssid))
+    Jenga.merchant(mssid, countryCode, curr, amount)
     # Jenga.lipanampesapush(mssid,countryCode,amount,desc)
     access = "hallo nigga"
     # bill_validation()

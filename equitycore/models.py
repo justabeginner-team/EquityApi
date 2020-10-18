@@ -85,6 +85,7 @@ class LipanampesaRequest(models.Model):
         db_table = "tbl_lipanampesaonline_push"
         verbose_name_plural = "LipaNaMpesaOnline Requests"
 
+
 class MerchantRequest(models.Model):
     """
         Handles Merchants Requests
@@ -93,11 +94,11 @@ class MerchantRequest(models.Model):
 
     partner_id = models.BigIntegerField(
         blank=True, null=True)
-    merchant_till=models.CharField(
-        max_length=12,null=False)
+    merchant_till = models.CharField(
+        max_length=12, null=False)
     currency = models.CharField(
         max_length=4)
-    partner_reference=models.CharField(max_length=15)
+    partner_reference = models.CharField(max_length=15)
     api_transaction_reference = models.CharField(
         max_length=20, unique=False, null=True)
     transaction_reference = models.CharField(
@@ -114,7 +115,6 @@ class MerchantRequest(models.Model):
     is_posted = models.BooleanField(default=False)
     paid = models.BooleanField(
         default=False)
-    
 
     def __str__(self):
         return str(self.partner_id)

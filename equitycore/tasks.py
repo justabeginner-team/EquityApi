@@ -25,10 +25,10 @@ def reference_id_generator(response):
     
     :returns: a string of 12 random unique digits from 000000000001 to 999999999999 with leading zeros i.e 000005678967
     """
-    data=dict(
+    data = dict(
         ref_id="%0.12d" % random.randint(1, 999999999999),
         token=response
-        )
+    )
     return data
 
 
@@ -49,7 +49,7 @@ def call_eazzypaaypush_task(
         country_code,
         amount,
         trans_desc,
-        
+
 ):
     """
     Handle eazzypaypush request
@@ -62,7 +62,7 @@ def call_eazzypaaypush_task(
     """
     print(pk)
     print(response["ref_id"])
-    return eazzypay_push(pk,response["token"], mssid, country_code, amount, trans_desc, response["ref_id"])
+    return eazzypay_push(pk, response["token"], mssid, country_code, amount, trans_desc, response["ref_id"])
 
 
 @shared_task(name="lipa_na_mpesa_push")
@@ -102,14 +102,15 @@ def query_transaction_task(
     """
     return query_transaction(response["token"], response["ref"])
 
+
 @shared_task(name="merchant_payment")
 def merchant_payment_task(
-    response,
-    partner_id,
-    merchant_till,
-    currency,
-    amount,
-    partner_reference,
+        response,
+        partner_id,
+        merchant_till,
+        currency,
+        amount,
+        partner_reference,
 
 ):
     return merchant_payments(
@@ -120,4 +121,4 @@ def merchant_payment_task(
         currency,
         partner_id,
         partner_reference,
-        )
+    )
