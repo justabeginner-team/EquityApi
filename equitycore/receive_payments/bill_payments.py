@@ -60,6 +60,7 @@ def bill_payments(
                                                    bill_currency, payer_name, payer_account, payer_account,
                                                    payer_reference, payer_mobile_number, partner_id, remarks)
 
+    print(payload)
     url = f"{settings.UAT_URL}/transaction/v2/bills/pay"
     response = post(url, payload=payload, headers=headers)
     data = json.loads(response.text)

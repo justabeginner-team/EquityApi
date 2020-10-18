@@ -63,7 +63,7 @@ class Jenga:
         merchant_till,
         currency, 
         amount,
-        account_number ="1100161816677",
+        account_number="0011547896523",
         ):
         """
         
@@ -71,7 +71,7 @@ class Jenga:
 
         try:
             MerchantRequest.objects.create(
-                    partner_id=account_number,
+                    partner_id=str(account_number),
                     partner_reference=cust_phone,
                     transaction_amount=amount,
                     currency=currency,

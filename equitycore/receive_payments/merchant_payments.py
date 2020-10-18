@@ -31,6 +31,25 @@ def merchant_payments(
     status	        string	    SUCCESS or FAILURE
     merchantName	string	    name of merchant receiving the payment
     transactionId	string	    payment transaction id
+    
+    
+    sample of payload::
+
+        {
+            "merchant":{
+            "till":"0766000000" 
+            },
+            "payment":{
+            "ref":"539440628712", 
+            "amount":"10", 
+            "currency":"KES", 
+            },
+            "partner":{
+            "id":"1100161816677", 
+            "ref":"0711521508" 
+            } 
+        }
+    
     """
 
     transaction_data = (
@@ -60,10 +79,11 @@ def merchant_payments(
                                 partner_reference
                                 )
 
+
     url = f"{settings.UAT_URL}/transaction/v2/tills/pay"
     response = post(url, payload=payload, headers=headers)
     data = json.loads(response.text)
-
+    print(payment_reference)
     response_data = dict(
         token=token,
         ref=payment_reference,
