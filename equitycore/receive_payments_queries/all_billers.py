@@ -20,6 +20,84 @@ def get_all_billers(
     billers	        array	        biller array
     billers.name	string	        biller name
     billers.code	string	        biller code
+
+    Example{
+        "billers": [
+            {
+                "name": "INCULSIVITY",
+                "code": "642292"
+            },
+            {
+                "name": "I PAY",
+                "code": "266300"
+            },
+            {
+                "name": "MDUKA ONLINE",
+                "code": "123456"
+            },
+            {
+                "name": "ECITIZEN",
+                "code": "967600"
+            },
+            {
+                "name": "KPLC",
+                "code": "6800001"
+            },
+            {
+                "name": "test biller",
+                "code": "400000"
+            },
+            {
+                "name": "JAMBO PAY TRUSTEE ACCOUNT",
+                "code": "147147"
+            },
+            {
+                "name": "I PAY",
+                "code": "300014"
+            },
+            {
+                "name": "ZUKU",
+                "code": "320320"
+            },
+            {
+                "name": "WINGS TO FLY",
+                "code": "344344"
+            },
+            {
+                "name": "VIRTUAL MOBILE LIMITED",
+                "code": "111111"
+            },
+            {
+                "name": "A.C.K ST JAMES CHURCH BURUBURU",
+                "code": "303030"
+            },
+            {
+                "name": "MARY WAMBUI KAMANDE",
+                "code": "389443"
+            },
+            {
+                "name": "SAMUEL THURI GACHO",
+                "code": "800589"
+            },
+            {
+                "name": "JOHN MUHUNGI THURI",
+                "code": "017019"
+            },
+            {
+                "name": "BENCHMARK DISTRIBUTORS LIMITED",
+                "code": "644443"
+            },
+            {
+                "name": "EAZZY PAY ONLINE",
+                "code": "900900"
+            },
+            {
+                "name": "AZURI TECHNOLOGIES KENYA LIMITED",
+                "code": "821055"
+            }
+        ]
+    }
+
     """
 
     headers = {
