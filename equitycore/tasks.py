@@ -136,8 +136,8 @@ def merchant_payment_task(
     )
 
 
-@shared_task(name="merchant_payment")
-def merchant_payment_task(
+@shared_task(name="bill_payment")
+def bill_payment_task(
         response,
         biller_code,
         country_code,

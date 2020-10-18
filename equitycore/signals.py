@@ -62,8 +62,9 @@ def handle_merchant_request(sender, instance, **Kwargs):
         )
     ).apply_async(queue="merchant_request")
 
-@receiver(post_save,sender=BillPaymentRequest)
-def handle_bill_payment_request(sender,instance,**Kwargs):
+
+@receiver(post_save, sender=BillPaymentRequest)
+def handle_bill_payment_request(sender, instance, **Kwargs):
     chain(
         bearer_token_task.s(),
         reference_id_generator.s(),
@@ -79,8 +80,7 @@ def handle_bill_payment_request(sender,instance,**Kwargs):
             str(instance.payer_mobile_number),
             str(instance.partner_id),
             str(instance.remarks),
-            
-           
+
         )
-        
+
     ).apply_async(queue="bill_request")
